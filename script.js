@@ -1,8 +1,9 @@
+/* eslint-disable semi */
 // memuat komponen yang diperlukan
-const encryptButton = document.getElementById("encryptButton");
-const plainText = document.getElementById("plaintext");
-const chiperText = document.getElementById("chipertext");
-const key = document.getElementById("key");
+const encryptButton = document.getElementById('encryptButton');
+const plainText = document.getElementById('plaintext');
+const chiperText = document.getElementById('chipertext');
+const key = document.getElementById('key');
 
 // saat tombol Encrypt ditekan
 encryptButton.addEventListener('click', e => {
@@ -22,10 +23,10 @@ const encrypt = (plain, key, chiper) => {
   // plain = plain.toLowerCase();
   // key = key.toLowerCase();
   // chiper = chiper.toLowerCase();
-  console.log("Plaintext = " + plain);
-  console.log("key = " + key);
-  console.log("Chipertext = " + chiper);
-  console.log("===================================");
+  console.log('Plaintext = ' + plain);
+  console.log('key = ' + key);
+  console.log('Chipertext = ' + chiper);
+  console.log('===================================');
 
   // menampung nilai-nilai ascii dari string
   let asciiPlains = convertToAscii(plain);
@@ -38,14 +39,12 @@ const encrypt = (plain, key, chiper) => {
   console.log(getAsciiChiper(asciiPlains, asciiKeys));
 
   chiperText.value = getChiperText(getAsciiChiper(asciiPlains, asciiKeys)).join('');
-
-
 }
 
 // konversi dari string menjadi array dari nilai-nilai ascii string
 const convertToAscii = string => {
   let asciiValues = [];
-  for (i in string) {
+  for (let i in string) {
     asciiValues.push(string.charCodeAt(i));
   }
 
@@ -62,13 +61,12 @@ const getTrueKeys = (asciiPlains, asciiKeys) => {
 
   // index untuk asciiKeys
   let j = 0;
-  for (i in asciiPlains) {
-    // jika asciiPlains ke-i bukan spasi, maka 
-    if (asciiPlains[i] != 32) {
-
+  for (let i in asciiPlains) {
+    // jika asciiPlains ke-i bukan spasi, maka
+    if (asciiPlains[i] !== 32) {
       // jika perulangan sudah mencapai batas index asciiKeys terakhir,
       // maka index asciiKeys akan diulang dari awal (0)
-      if (j == keyLength) {
+      if (j === keyLength) {
         j = 0;
       }
 
@@ -76,7 +74,6 @@ const getTrueKeys = (asciiPlains, asciiKeys) => {
       trueKeys.push(asciiKeys[j]);
       j++;
     } else { // jika adalah spasi, maka
-
       // trueKey = spasi
       trueKeys.push(32);
     }
@@ -92,24 +89,21 @@ const getAsciiChiper = (asciiPlains, asciiKeys) => {
 
   // menampung array untuk hasil chipertext
   const asciiChiper = [];
-  for (i in asciiPlains) {
+  for (let i in asciiPlains) {
     // mengatasi nilai spasi
-    if (asciiPlains[i] == 32) {
+    if (asciiPlains[i] === 32) {
       asciiChiper.push(32);
     } else {
-      let n;
+      let n = 0;
+      let m = 0;
 
       // pisahkan logika perhitungan kunci UPPERCASE dan lowercase
-      if (asciiKeys[i] <= 90 && asciiKeys[i] >= 65) {
-        m = 0;
-      } else {
+      if (asciiKeys[i] <= 122 && asciiKeys[i] >= 97) {
         m = 32;
       }
 
       // pisahkan logika perhitungan plaintext UPPERCASE dan lowercase
-      if (asciiPlains[i] <= 90 && asciiPlains[i] >= 65) {
-        n = 0;
-      } else {
+      if (asciiPlains[i] <= 122 && asciiPlains[i] >= 97) {
         n = 32;
       }
 
@@ -126,10 +120,11 @@ const getAsciiChiper = (asciiPlains, asciiKeys) => {
 // mendapatkan / konversi nilai ascii chipertext menjadi chipertext
 const getChiperText = asciiChiper => {
   const chiperText = [];
-  for (i in asciiChiper) {
+  for (let i in asciiChiper) {
     chiperText.push(String.fromCharCode(asciiChiper[i]));
   }
 
   // hasilkan array chipertext
   return chiperText;
+  // eslint-disable-next-line eol-last
 }
