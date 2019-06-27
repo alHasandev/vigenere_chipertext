@@ -14,12 +14,11 @@ encryptButton.addEventListener('click', e => {
   // mengambil inputan plaintext
   let DataPlain = plainText.value;
 
-  // mengampil inputan key 
+  // mengampil inputan key
   let DataKey = key.value;
   // let DataChiper = chiperText.value;
 
   encrypt(DataPlain, DataKey);
-
 });
 
 // proses enkripsi
@@ -83,7 +82,7 @@ const encrypt = (plains, keys) => {
       mod = '<bukan huruf>';
     }
 
-    console.log(`[${i}] ${plains[i]}(${asciiPlains[i]-n}) + ${trueKeys[i]}(${asciiKeys[i]-m}) ${mod} ${ciphertext[i]}(${asciiCipher[i]-n})`);
+    console.log(`[${i}] ${plains[i]}(${asciiPlains[i] - n}) + ${trueKeys[i]}(${asciiKeys[i] - m}) ${mod} ${ciphertext[i]}(${asciiCipher[i] - n})`);
   }
 }
 
