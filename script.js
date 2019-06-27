@@ -52,25 +52,38 @@ const encrypt = (plains, keys) => {
   let trueKeys = convertToChar(asciiKeys);
 
   // pemberitahuan bahwa -1 adalah perwakilan dari char plaintext yang tidak valid
-  console.log('0~26 adalah nilai char plaintext');
+  console.log('0~25 adalah nilai char plaintext');
   console.log('-1 adalah char yang tidak valid');
 
   for (let i in asciiPlains) {
     let n;
+    let m;
     let mod;
+
+    // normalisasi nilai ascii plaintext
     if (isMinMax(asciiPlains[i], 65, 90)) {
       n = 65;
-      mod = 'MOD 26 =>';
     } else
     if (isMinMax(asciiPlains[i], 97, 122)) {
       n = 97;
-      mod = 'MOD 26 =>';
     } else {
       n = asciiPlains[i] + 1;
+    }
+
+    // normalisasi nilai ascii key
+    if (isMinMax(asciiKeys[i], 65, 90)) {
+      m = 65;
+      mod = 'MOD 26 =>';
+    } else
+    if (isMinMax(asciiKeys[i], 97, 122)) {
+      m = 97;
+      mod = 'MOD 26 =>';
+    } else {
+      m = asciiKeys[i] + 1;
       mod = '<bukan huruf>';
     }
 
-    console.log(`[${i}] ${plains[i]}(${asciiPlains[i]-n}) + ${trueKeys[i]}(${asciiKeys[i]-n}) ${mod} ${ciphertext[i]}(${asciiCipher[i]-n})`);
+    console.log(`[${i}] ${plains[i]}(${asciiPlains[i]-n}) + ${trueKeys[i]}(${asciiKeys[i]-m}) ${mod} ${ciphertext[i]}(${asciiCipher[i]-n})`);
   }
 }
 
